@@ -1,0 +1,34 @@
+- name: Install k8s
+  hosts: clusters
+  remote_user: pi
+  become: yes
+  vars:
+    kubernetes_version: 1.23.1
+    container_runtime: containerd
+
+  tasks:
+  - name: Add k8s repo
+    apt_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+
+  - name: Update system
+    apt:
+      update_cache: yes
+
+  - name: Update packages
+    apt:
+      name: "*"
+      state: latest
+
+  - name: Installing packages
+    apt:
+      pkg:
+        - kubelet={{ kubernetes_version }}-00
+        - kubectl={{ kubernetes_version }}-00
+        - kubeadm={{ kubernetes_version }}-00
+
+  - name: Reset Kubernetes component
+    shell: "kubeadm reset --force --cri-socket=/var/run/{{ container_runtime }}/{{ container_runtime }}.sock"
+    register: reset_cluster
+

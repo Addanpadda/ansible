@@ -1,0 +1,33 @@
+- name: Install grounds
+  hosts: clusters
+  remote_user: pi
+  become: yes
+  vars:
+    drive: /dev/sda1
+    storage: /media/storage
+    home: /home/pi
+
+  tasks:
+  - name: Shell export TERM
+    lineinfile:
+      path: "{{ home }}/.bashrc"
+      line: export TERM=xterm
+
+  - name: Create storage dir {{ storage }}
+    file:
+      path: "{{ storage }}"
+      state: directory
+
+  - name: Get {{ drive }} UUID
+    shell: blkid | grep {{ drive }} | awk '{print $2}' | cut -f2 -d '"'
+    register: uuid
+
+  - name: Add {{ drive }} to {{ storage }} in fstab'
+    when: ansible_mounts | selectattr('mount', 'equalto', storage) | list | length == 0
+    lineinfile:
+      path: /etc/fstab
+      line: UUID={{ uuid.stdout }}  {{ storage }} btrfs rw,noatime,space_cache  0 0
+
+  - name: Mount all
+    when: ansible_mounts | selectattr('mount', 'equalto', storage) | list | length == 0
+    shell: mount -a
