@@ -1,0 +1,15 @@
+- name: Setup grounds
+  hosts: servers
+  roles:
+    - common
+
+- name: Add storage devices
+  hosts: media_center
+  roles: 
+    - storage-device
+  become: yes
+
+- name: Setup Kodi
+  hosts: media_center
+  roles:
+    - kodi

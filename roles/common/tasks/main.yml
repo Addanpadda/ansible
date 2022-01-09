@@ -1,0 +1,5 @@
+- name: Setup bash
+  import_tasks: bash.yml
+
+- name: Update/Install packages
+  import_tasks: debian-pkg.yml

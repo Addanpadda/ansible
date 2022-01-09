@@ -1,0 +1,16 @@
+- name: Install packages
+  import_tasks: debian-pkg.yml
+
+- name: Setup python
+  import_tasks: python.yml
+
+- name: Copy configuration
+  synchronize:
+    src: .kodi/
+    dest: "{{ home }}/.kodi/"
+
+- name: Enable autostart
+  lineinfile:
+    path: /etc/xdg/lxsession/LXDE-pi/autostart
+    line: "@kodi"
+    insertbefore: BOF

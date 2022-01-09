@@ -1,0 +1,9 @@
+- name: Installing packages
+  become: yes
+  apt:
+    pkg:
+      - kodi
+      - kodi-inputstream-adaptive
+      - build-essential
+      - python3-pip
+      - libnss3

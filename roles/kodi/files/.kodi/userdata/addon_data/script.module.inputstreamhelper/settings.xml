@@ -1,0 +1,13 @@
+<settings version="2">
+    <setting id="last_modified">1641506235.904502</setting>
+    <setting id="last_check">1641579889.60384</setting>
+    <setting id="update_declined_at" default="true">0.0</setting>
+    <setting id="version">0.5.8+matrix.1</setting>
+    <setting id="disabled" default="true">false</setting>
+    <setting id="label6" default="true" />
+    <setting id="update_frequency">31</setting>
+    <setting id="temp_path" default="true">special://masterprofile/addon_data/script.module.inputstreamhelper</setting>
+    <setting id="backups">4</setting>
+    <setting id="label1" default="true" />
+    <setting id="label11" default="true" />
+</settings>

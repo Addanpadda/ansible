@@ -1,0 +1,3 @@
+drive: /dev/sda1
+storage: /media/storage
+home: /home/pi

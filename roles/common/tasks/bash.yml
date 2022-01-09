@@ -1,0 +1,9 @@
+- name: Shell export TERM
+  lineinfile:
+    path: "$HOME/.bashrc"
+    line: export TERM=xterm
+
+- name: Shell aliases
+  lineinfile:
+    path: "$HOME/.bashrc"
+    line: alias l="ls" && alias v="vim" && alias sv="sudo vim"

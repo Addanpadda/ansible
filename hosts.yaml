@@ -1,7 +1,0 @@
-all:
-  hosts:
-    127.0.0.1
-  children:
-    clusters:
-      hosts:
-        192.168.0.105
